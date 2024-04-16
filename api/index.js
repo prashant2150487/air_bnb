@@ -26,17 +26,13 @@ app.get('/test', (req, res) => {
 
 app.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(hashedPassword)
-    const userDoc=await User.create({ name, email, password: hashedPassword });
-    res.json(userDoc)
-    try{
+    try {
         const hashedPassword = await bcrypt.hash(password, 10);
         console.log(hashedPassword)
         const userDoc = await User.create({ name, email, password: hashedPassword });
         res.json(userDoc)
-    }catch(e){
-        res.status(422).json(e)
+    } catch (e) {
+        res.status(422).json("")
     }
 })
 
